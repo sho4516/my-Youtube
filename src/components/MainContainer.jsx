@@ -4,7 +4,7 @@ import ButtonList from './ButtonList'
 
 const MainContainer = () => {
   return (
-    <div className='w-full overflow-y-hidden'>
+    <div className='w-full overflow-hidden'>
         <ButtonList />
         <VideoCard />
     </div>
