@@ -1,0 +1,56 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+import { toggleSideMenu } from "../utils/redux/appSlice";
+
+const Head = () => {
+  const dispatch = useDispatch();
+
+  const toggleMenuHandler = () => {
+    dispatch(toggleSideMenu());
+  };
+  return (
+    <div className="header flex flex-row h-15 w-screen py-3 px-3 fixed items-center z-1000 top-0 bg-black">
+      <div className="w-[15%] flex flex-row justify-start gap-4 relative items-center">
+        <div className="h-12 w-10 relative cursor-pointer flex justify-center items-center">
+          <i
+            className="fa-solid fa-bars text-3xl font-light"
+            onClick={toggleMenuHandler}
+          ></i>
+        </div>
+        <div className="h-12 w-20 relative">
+          <img
+            className="w-full h-full object-cover"
+            alt="logo"
+            src="https://i.pinimg.com/736x/82/a1/f6/82a1f6c92420ee6bf10e1941ebc7f00b.jpg"
+          />
+        </div>
+      </div>
+      <div className="w-[70%] h-12 flex flex-row justify-center relative items-center">
+        <div className="w-[60%] flex flex-row justify-center relative items-center">
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-[90%] border-1 border-[#303031] rounded-l-[15px] focus:outline-none px-5 py-1 relative"
+          />
+          <button
+            type="button"
+            className="w-auto relative border-[#303031] border-1 border-l-0 rounded-r-[15px] h-full px-3 py-1 cursor-pointer bg-[#222223]"
+          >
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+      <div className="w-[15%] h-12 flex flex-row justify-end relative items-center">
+        <div className="h-12 w-12 relative mr-4 cursor-pointer">
+          <img
+            className="w-full h-full object-cover rounded-4xl"
+            alt="userIcon"
+            src="/userIcon.jpg"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Head;
