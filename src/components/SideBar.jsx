@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuItem from "./MenuItem";
 import { useSelector } from "react-redux";
 
 const SideBar = () => {
   const isMenuOpen = useSelector((store) => store.app.isSideMenuOpen);
   if (!isMenuOpen) return null;
+
+  const [selected, setSelected] = useState("Home");
 
   const menuItems1 = [
     { id: 1, icon: "fa-house", label: "Home" },
@@ -36,13 +38,20 @@ const SideBar = () => {
     { id: 4, icon: "fa-podcast", label: "Podcasts" },
   ];
 
+  const handleMenuItemClick = (label) => {
+    setSelected(label);
+  };
+
   return (
     <div className="w-[20%] h-[90vh] overflow-y-auto scrollbar-hide">
       <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-300 after:my-4">
         {menuItems1.map((item) => (
           <li
             key={item.id}
-            className="mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition"
+            className={`mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition ${
+              selected === item.label ? "bg-gray-400" : ""
+            }`}
+            onClick={() => handleMenuItemClick(item.label)}
           >
             <i className={`fa-solid ${item.icon}`}></i>
             <div>{item.label}</div>
@@ -57,7 +66,10 @@ const SideBar = () => {
         {menuItems2.map((item) => (
           <li
             key={item.id}
-            className="mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition"
+            className={`mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition ${
+              selected === item.label ? "bg-gray-400" : ""
+            }`}
+            onClick={() => handleMenuItemClick(item.label)}
           >
             <i className={`fa-solid ${item.icon}`}></i>
             <div>{item.label}</div>
@@ -72,7 +84,10 @@ const SideBar = () => {
         {menuItems3.map((item) => (
           <li
             key={item.id}
-            className="mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition"
+            className={`mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition ${
+              selected === item.label ? "bg-gray-400" : ""
+            }`}
+            onClick={() => handleMenuItemClick(item.label)}
           >
             <i className={`fa-solid ${item.icon}`}></i>
             <div>{item.label}</div>
