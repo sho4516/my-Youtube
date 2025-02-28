@@ -44,7 +44,7 @@ const SideBar = () => {
 
   return (
     <div className="w-[20%] h-[90vh] overflow-y-auto scrollbar-hide">
-      <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-300 after:my-4">
+      <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-700 after:my-4">
         {menuItems1.map((item) => (
           <li
             key={item.id}
@@ -62,7 +62,7 @@ const SideBar = () => {
       <h1 className="ml-3 font-extrabold text-red-700">
         You<i class="fa-solid fa-arrow-right ml-2 font-light"></i>
       </h1>
-      <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-300 after:my-4">
+      <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-700 after:my-4">
         {menuItems2.map((item) => (
           <li
             key={item.id}
@@ -80,7 +80,7 @@ const SideBar = () => {
       <h1 className="ml-3 font-extrabold text-red-700">
         Explore<i class="fa-solid fa-arrow-right ml-2 font-light"></i>
       </h1>
-      <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-300 after:my-4">
+      <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-700 after:my-4">
         {menuItems3.map((item) => (
           <li
             key={item.id}
