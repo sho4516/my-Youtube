@@ -1,14 +1,14 @@
-import React from 'react'
-import VideoCard from './VideoCard'
-import ButtonList from './ButtonList'
+import React from "react";
+import ButtonList from "./ButtonList";
+import VideoContainer from "./VideoContainer";
 
 const MainContainer = () => {
   return (
-    <div className='w-full overflow-hidden'>
-        <ButtonList />
-        <VideoCard />
+    <div className="w-full overflow-hidden">
+      <ButtonList />
+      <VideoContainer />
     </div>
-  )
-}
+  );
+};
 
-export default MainContainer
+export default MainContainer;
