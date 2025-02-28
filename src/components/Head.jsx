@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleSideMenu } from "../utils/redux/appSlice";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 
 const Head = () => {
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchSuggestions();
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchText]);
 
   const toggleMenuHandler = () => {
     dispatch(toggleSideMenu());
   };
+
+  const fetchSuggestions = async () => {
+    const response = await fetch(
+      `https://youtubesearchapi-u6ni.onrender.com/suggest?q=${searchText}`
+    );
+    const data = await response.json();
+    setSuggestions(data[1]);
+  };
+
   return (
     <div className="header flex flex-row h-15 w-screen py-3 px-3 fixed items-center z-1000 top-0 bg-black">
       <div className="w-[15%] flex flex-row justify-start gap-4 relative items-center">
@@ -31,6 +53,9 @@ const Head = () => {
             type="text"
             placeholder="Search"
             className="w-[90%] border-1 border-[#303031] rounded-l-[15px] focus:outline-none px-5 py-1 relative"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            onBlur={() => setSuggestions([])}
           />
           <button
             type="button"
@@ -38,6 +63,19 @@ const Head = () => {
           >
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
+        </div>
+        <div
+          className={`absolute w-[55%] top-12 flex flex-col bg-[#272727;] text-white rounded-lg gap-2 shadow-lg ${
+            suggestions.length > 0 ? "block" : "hidden"
+          }`}
+        >
+          {suggestions.length > 0 &&
+            suggestions.map((suggestion) => (
+              <div className="w-full px-4 pt-3 h-full flex gap-3 items-center cursor-pointer hover:bg-[#232222] transition-all last:pb-3">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                {suggestion}
+              </div>
+            ))}
         </div>
       </div>
       <div className="w-[15%] h-12 flex flex-row justify-end relative items-center">
