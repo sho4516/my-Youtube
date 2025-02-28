@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import MenuItem from "./MenuItem";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const isMenuOpen = useSelector((store) => store.app.isSideMenuOpen);
-  if (!isMenuOpen) return null;
-
   const [selected, setSelected] = useState("Home");
 
+  if (!isMenuOpen) return null;
+
   const menuItems1 = [
-    { id: 1, icon: "fa-house", label: "Home" },
+    { id: 1, icon: "fa-house", label: "Home", route: "/" },
     { id: 2, icon: "fa-video", label: "Shorts" },
     { id: 3, icon: "fa-rss", label: "Subscriptions" },
     { id: 4, icon: "fa-music", label: "YouTube Music" },
@@ -46,16 +46,18 @@ const SideBar = () => {
     <div className="w-[20%] h-[90vh] overflow-y-auto scrollbar-hide">
       <ul className="after:content-[''] after:block after:h-[1px] after:bg-gray-700 after:my-4">
         {menuItems1.map((item) => (
-          <li
-            key={item.id}
-            className={`mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition ${
-              selected === item.label ? "bg-gray-400" : ""
-            }`}
-            onClick={() => handleMenuItemClick(item.label)}
-          >
-            <i className={`fa-solid ${item.icon}`}></i>
-            <div>{item.label}</div>
-          </li>
+          <Link to={item.route}>
+            <li
+              key={item.id}
+              className={`mt-2 border-0 px-4 py-2 flex flex-row justify-start items-center gap-4 rounded-2xl cursor-pointer hover:bg-gray-500 transition ${
+                selected === item.label ? "bg-gray-400" : ""
+              }`}
+              onClick={() => handleMenuItemClick(item.label)}
+            >
+              <i className={`fa-solid ${item.icon}`}></i>
+              <div>{item.label}</div>
+            </li>
+          </Link>
         ))}
       </ul>
 

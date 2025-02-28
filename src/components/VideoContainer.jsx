@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_VIDEOS_URL } from "../utils/constants";
 import getAccessToken from "../utils/FetchAccessToken";
 import VideoCard from "./VideoCard";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addVideos } from "../utils/redux/videoSlice";
 
 const VideoContainer = () => {
-  const [videos, setVideos] = useState([]);
+  const dispatch = useDispatch();
+  const { videos } = useSelector((state) => state.video);
 
   useEffect(() => {
     fetchVideos();
@@ -21,12 +25,17 @@ const VideoContainer = () => {
     });
 
     const data = await response.json();
-    setVideos(data.items);
+    dispatch(addVideos(data.items));
   };
   return (
     <div className="mt-4 p-2 h-[calc(100vh-5rem)] flex flex-row flex-wrap gap-12 overflow-y-auto scrollbar-hide">
       {videos.map((video) => (
-        <VideoCard info={video} />
+        <Link
+          className="relative w-[30%] h-72 p-2 flex flex-col gap-2 cursor-pointer"
+          to={"watch?v=" + video.id}
+        >
+          <VideoCard key={video.id} info={video} />
+        </Link>
       ))}
     </div>
   );

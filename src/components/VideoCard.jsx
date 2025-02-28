@@ -21,13 +21,13 @@ const VideoCard = ({ info }) => {
   };
 
   return (
-    <div className="relative w-[30%] h-72 p-2 flex flex-col gap-2 cursor-pointer">
+    <>
       <div className="img-container relative w-[100%] h-[60%] rounded-lg">
         <img
           className="w-full h-full relative object-cover rounded-lg"
           src={thumbnails.standard.url}
         />
-        <div className="absolute bottom-2 right-2 bg-black/70 px-2 py-1 rounded-lg">
+        <div className="absolute bottom-2 right-2 bg-black/40 px-2 py-1 rounded-lg">
           {constructTime(contentDetails.duration)}
         </div>
       </div>
@@ -38,7 +38,7 @@ const VideoCard = ({ info }) => {
       <div className="font-normal text-xs text-[#aaaaaa]">
         {convertViews(statistics.viewCount)} views
       </div>
-    </div>
+    </>
   );
 };
 
