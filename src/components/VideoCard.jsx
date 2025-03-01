@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const VideoCard = ({ info }) => {
   if (info.length == 0) return;
-  const { contentDetails, snippet, statistics } = info;
+  const { contentDetails, snippet, statistics, id } = info;
   const { thumbnails, title } = snippet;
+  const [isHovered, setIsHovered] = useState(false);
 
   const constructTime = (duration) => {
     const match = duration.match(/PT(\d+M)?(\d+S)?/);
@@ -22,14 +23,33 @@ const VideoCard = ({ info }) => {
 
   return (
     <>
-      <div className="img-container relative w-[100%] h-[60%] rounded-lg">
-        <img
-          className="w-full h-full relative object-cover rounded-lg"
-          src={thumbnails.standard.url}
-        />
-        <div className="absolute bottom-2 right-2 bg-black/40 px-2 py-1 rounded-lg">
-          {constructTime(contentDetails.duration)}
-        </div>
+      <div
+        className="img-container relative w-[100%] h-[60%] rounded-lg"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {isHovered ? (
+          <iframe
+            className="w-full h-full object-cover cursor-pointer"
+            src={"https://www.youtube.com/embed/" + id + "?autoplay=1"}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <img
+            className="w-full h-full relative object-cover rounded-lg"
+            src={thumbnails.standard.url}
+          />
+        )}
+
+        {!isHovered && (
+          <div className="absolute bottom-2 right-2 bg-black/40 px-2 py-1 rounded-lg">
+            {constructTime(contentDetails.duration)}
+          </div>
+        )}
       </div>
       <div className="font-normal text-sm">{title}</div>
       <div className="font-normal text-xs text-[#aaaaaa]">
