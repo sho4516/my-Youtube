@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSideMenu } from "../utils/redux/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { addSearchSuggestions } from "../utils/redux/searchSlice";
 
 const Head = () => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const searchCache = useSelector((state) => state.search);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchSuggestions();
+      if (searchCache[searchText]) {
+        setSuggestions(searchCache[searchText]);
+      } else {
+        fetchSuggestions();
+      }
     }, 200);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [searchText]);
+  }, [searchText, searchCache]);
 
   const toggleMenuHandler = () => {
     dispatch(toggleSideMenu());
@@ -27,7 +33,7 @@ const Head = () => {
       `https://youtubesearchapi-u6ni.onrender.com/suggest?q=${searchText}`
     );
     const data = await response.json();
-    setSuggestions(data[1]);
+    dispatch(addSearchSuggestions({ [searchText]: data[1] }));
   };
 
   return (
