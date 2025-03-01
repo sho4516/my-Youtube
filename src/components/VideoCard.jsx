@@ -7,11 +7,19 @@ const VideoCard = ({ info }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const constructTime = (duration) => {
-    const match = duration.match(/PT(\d+M)?(\d+S)?/);
-    const minutes = match[1] ? parseInt(match[1]) : 0;
-    const seconds = match[2] ? parseInt(match[2]) : 0;
+    if (!duration) return "0:00";
+    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+    const hrs = match[1] ? parseInt(match[1]) : 0;
+    const minutes = match[2] ? parseInt(match[2]) : 0;
+    const seconds = match[3] ? parseInt(match[3]) : 0;
 
-    return `${minutes}:${seconds.toString().padStart(2, 0)}`;
+    if (hrs != 0) {
+      return `${hrs}:${minutes.toString().padStart(2, 0)}:${seconds
+        .toString()
+        .padStart(2, 0)}`;
+    } else {
+      return `${minutes}:${seconds.toString().padStart(2, 0)}`;
+    }
   };
 
   const convertViews = (views) => {
@@ -41,13 +49,13 @@ const VideoCard = ({ info }) => {
         ) : (
           <img
             className="w-full h-full relative object-cover rounded-lg"
-            src={thumbnails.standard.url}
+            src={thumbnails?.standard?.url}
           />
         )}
 
         {!isHovered && (
           <div className="absolute bottom-2 right-2 bg-black/40 px-2 py-1 rounded-lg">
-            {constructTime(contentDetails.duration)}
+            {constructTime(contentDetails?.duration)}
           </div>
         )}
       </div>

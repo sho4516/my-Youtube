@@ -5,13 +5,16 @@ import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addVideos } from "../utils/redux/videoSlice";
+import { addVideosNotLoading } from "../utils/redux/appSlice";
+import Shimmer from "./Shimmer";
 
 const VideoContainer = () => {
   const dispatch = useDispatch();
   const { videos } = useSelector((state) => state.video);
+  const { isVideosLoading } = useSelector((state) => state.app);
 
   useEffect(() => {
-    fetchVideos();
+    if (videos.length == 0) fetchVideos();
   }, []);
 
   const fetchVideos = async () => {
@@ -26,17 +29,21 @@ const VideoContainer = () => {
 
     const data = await response.json();
     dispatch(addVideos(data.items));
+    dispatch(addVideosNotLoading());
   };
   return (
     <div className="mt-4 p-2 h-[calc(100vh-5rem)] flex flex-row flex-wrap gap-12 overflow-y-auto scrollbar-hide">
-      {videos.map((video) => (
-        <Link
-          className="relative w-[30%] h-72 p-2 flex flex-col gap-2 cursor-pointer hover:scale-110 transition duration-300"
-          to={"watch?v=" + video.id}
-        >
-          <VideoCard key={video.id} info={video} />
-        </Link>
-      ))}
+      {!isVideosLoading &&
+        videos.map((video) => (
+          <Link
+            className="relative w-[30%] h-72 p-2 flex flex-col gap-2 cursor-pointer hover:scale-110 transition duration-300"
+            to={"watch?v=" + video.id}
+          >
+            <VideoCard key={video.id} info={video} />
+          </Link>
+        ))}
+      {isVideosLoading &&
+        [...Array(8)].map((_, index) => <Shimmer key={index} />)}
     </div>
   );
 };

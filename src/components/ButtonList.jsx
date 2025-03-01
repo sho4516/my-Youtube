@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import { fetchVideos } from "../utils/FetchVideos";
+import { useDispatch } from "react-redux";
+import { addVideosLoading } from "../utils/redux/appSlice";
 
 const buttons = [
   "All",
@@ -22,9 +25,12 @@ const buttons = [
 
 const ButtonList = () => {
   const [selected, setSelected] = useState("All");
+  const dispatch = useDispatch();
 
   const handleButtonClick = (button) => {
+    dispatch(addVideosLoading());
     setSelected(button);
+    fetchVideos(button, dispatch);
   };
 
   return (

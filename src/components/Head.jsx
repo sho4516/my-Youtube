@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSideMenu } from "../utils/redux/appSlice";
-import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { addVideosLoading, toggleSideMenu } from "../utils/redux/appSlice";
 import { addSearchSuggestions } from "../utils/redux/searchSlice";
+import { fetchVideos } from "../utils/FetchVideos";
 
 const Head = () => {
   const dispatch = useDispatch();
@@ -36,9 +36,11 @@ const Head = () => {
     dispatch(addSearchSuggestions({ [searchText]: data[1] }));
   };
 
-  const handleSearchClick = (suggestion) => {
-    
-  }
+  const handleSearchClick = async (suggestion) => {
+    dispatch(addVideosLoading());
+    setSearchText("");
+    fetchVideos(suggestion, dispatch);
+  };
 
   return (
     <div className="header flex flex-row h-15 w-screen py-3 px-3 fixed items-center z-1000 top-0 bg-black">
@@ -65,11 +67,12 @@ const Head = () => {
             className="w-[90%] border-1 border-[#303031] rounded-l-[15px] focus:outline-none px-5 py-1 relative"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            onBlur={() => setSuggestions([])}
+            onBlur={() => setTimeout(() => setSuggestions([]), 200)}
           />
           <button
             type="button"
             className="w-auto relative border-[#303031] border-1 border-l-0 rounded-r-[15px] h-full px-3 py-1 cursor-pointer bg-[#222223]"
+            onClick={() => handleSearchClick(searchText)}
           >
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -80,8 +83,9 @@ const Head = () => {
           }`}
         >
           {suggestions.length > 0 &&
-            suggestions.map((suggestion) => (
+            suggestions.map((suggestion, index) => (
               <div
+                key={index}
                 className="w-full px-4 pt-3 h-full flex gap-3 items-center cursor-pointer hover:bg-[#232222] transition-all last:pb-3"
                 onClick={() => handleSearchClick(suggestion)}
               >
