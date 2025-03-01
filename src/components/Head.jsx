@@ -36,6 +36,10 @@ const Head = () => {
     dispatch(addSearchSuggestions({ [searchText]: data[1] }));
   };
 
+  const handleSearchClick = (suggestion) => {
+    
+  }
+
   return (
     <div className="header flex flex-row h-15 w-screen py-3 px-3 fixed items-center z-1000 top-0 bg-black">
       <div className="w-[15%] flex flex-row justify-start gap-4 relative items-center">
@@ -77,7 +81,10 @@ const Head = () => {
         >
           {suggestions.length > 0 &&
             suggestions.map((suggestion) => (
-              <div className="w-full px-4 pt-3 h-full flex gap-3 items-center cursor-pointer hover:bg-[#232222] transition-all last:pb-3">
+              <div
+                className="w-full px-4 pt-3 h-full flex gap-3 items-center cursor-pointer hover:bg-[#232222] transition-all last:pb-3"
+                onClick={() => handleSearchClick(suggestion)}
+              >
                 <i class="fa-solid fa-magnifying-glass"></i>
                 {suggestion}
               </div>
