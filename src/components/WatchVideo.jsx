@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeSideMenu } from "../utils/redux/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentContainer from "./CommentContainer";
+import LiveChat from "./LiveChat";
 
 const WatchVideo = () => {
   const [params] = useSearchParams();
@@ -45,7 +46,9 @@ const WatchVideo = () => {
         <CommentContainer videoId={videoId} />
       </div>
 
-      <div className="border-amber-50 border-2 w-[30%]"></div>
+      <div className="w-[30%] overflow-y-auto scrollbar-hide">
+        <LiveChat videoId={videoId} />
+      </div>
     </div>
   );
 };
