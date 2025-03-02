@@ -37,7 +37,7 @@ const VideoContainer = () => {
         videos.map((video) => (
           <Link
             className="relative w-[30%] h-72 p-2 flex flex-col gap-2 cursor-pointer hover:scale-110 transition duration-300"
-            to={"watch?v=" + video.id}
+            to={"watch?v=" + video.id + "&title=" + video?.snippet?.title}
           >
             <VideoCard key={video.id} info={video} />
           </Link>

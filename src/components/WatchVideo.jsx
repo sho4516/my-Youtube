@@ -7,6 +7,7 @@ import CommentContainer from "./CommentContainer";
 const WatchVideo = () => {
   const [params] = useSearchParams();
   const videoId = params.get("v");
+  const title = params.get("title");
   const dispatch = useDispatch();
   const { videos } = useSelector((state) => state.video);
 
@@ -18,12 +19,9 @@ const WatchVideo = () => {
       const foundVideo = getVideo();
       setVideo(foundVideo);
     }
-  }, [videos, videoId, dispatch]);
+  }, [videos, video, videoId, dispatch]);
 
   const getVideo = () => {
-    console.log(videoId);
-    console.log(videos);
-    console.log(videos.find((video) => video.id == videoId));
     return videos.find((video) => video.id == videoId);
   };
 
@@ -42,7 +40,7 @@ const WatchVideo = () => {
           ></iframe>
         </div>
 
-        <div className="w-full text-lg">{video?.snippet?.title}</div>
+        <div className="w-full text-lg">{title}</div>
 
         <CommentContainer videoId={videoId} />
       </div>

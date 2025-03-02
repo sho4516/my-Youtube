@@ -27,7 +27,7 @@ const CommentContainer = ({ videoId }) => {
           params: {
             part: "snippet",
             videoId: videoId,
-            maxResults: 10,
+            maxResults: 30,
             pageToken: pageToken,
           },
         }

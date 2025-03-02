@@ -11,17 +11,17 @@ const Comment = ({ comment }) => {
   } = data;
 
   return (
-    <div className="flex flex-row justify-start w-full h-auto px-2 py-2 mt-2 items-center gap-3">
-      <div className="w-10 h-10 rounded-full relative">
+    <div className="flex flex-row justify-start w-full h-auto px-2 py-2 mt-2 items-start bg-white/30 rounded-lg mb-4">
+      <div className="w-[5%] rounded-full relative">
         <img
-          className="w-full h-full rounded-full object-cover"
+          className="w-10 h-10 rounded-full object-cover"
           src={authorProfileImageUrl}
           alt="userImage"
         />
       </div>
-      <div className="flex flex-col justify-start gap-1">
+      <div className="flex w-[95%] flex-col justify-start gap-1">
         <div className="text-sm">{authorDisplayName}</div>
-        <div className="text-lg">{textOriginal}</div>
+        <div className="text-md">{textOriginal}</div>
       </div>
     </div>
   );
