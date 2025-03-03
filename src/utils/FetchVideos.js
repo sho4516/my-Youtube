@@ -50,7 +50,6 @@ export const fetchVideoDetails = async (videoIds, accessToken, dispatch) => {
     }
 
     const detailsData = await detailsResponse.json();
-    console.log(detailsData.items);
     dispatch(addVideos(detailsData.items));
     dispatch(addVideosNotLoading());
   } catch (error) {

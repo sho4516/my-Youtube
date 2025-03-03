@@ -28,7 +28,6 @@ export const fetchLiveChatMessages = async (liveChatId, token, dispatch) => {
     }
   );
   const data = await res.json();
-  console.log(data);
   const detailsArray = data.items.map((item) => {
     return {
       name: item?.authorDetails?.displayName,

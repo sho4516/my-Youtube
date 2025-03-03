@@ -19,7 +19,6 @@ const VideoContainer = () => {
 
   const fetchVideos = async () => {
     const newAccessToken = await getAccessToken();
-    console.log(newAccessToken);
     const response = await fetch(YOUTUBE_VIDEOS_URL, {
       method: "GET",
       headers: {
@@ -30,7 +29,6 @@ const VideoContainer = () => {
 
     const data = await response.json();
     dispatch(addVideos(data.items));
-    console.log(data.items);
     dispatch(addVideosNotLoading());
   };
   return (

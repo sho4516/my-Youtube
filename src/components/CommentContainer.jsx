@@ -33,7 +33,6 @@ const CommentContainer = ({ videoId }) => {
         }
       );
 
-      console.log(response.data.items);
       setComments(response.data.items);
     } catch (error) {
       console.error("Error fetching comments:", error);

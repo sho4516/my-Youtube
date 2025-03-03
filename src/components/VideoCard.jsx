@@ -7,7 +7,6 @@ const VideoCard = ({ info }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const constructTime = (duration) => {
-    console.log(duration);
     if (!duration) return "0:00";
     if (duration == "P0D") return "Live";
     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
