@@ -36,6 +36,7 @@ const VideoContainer = () => {
   return (
     <div className="mt-4 p-2 h-[calc(100vh-5rem)] flex flex-row flex-wrap gap-12 overflow-y-auto scrollbar-hide">
       {!isVideosLoading &&
+        videos &&
         videos.map((video) => (
           <Link
             className="relative w-[30%] h-72 p-2 flex flex-col gap-2 cursor-pointer hover:scale-110 transition duration-300"
@@ -45,6 +46,10 @@ const VideoContainer = () => {
           </Link>
         ))}
       {isVideosLoading &&
+        [...Array(8)].map((_, index) => <Shimmer key={index} />)}
+
+      {!isVideosLoading &&
+        !videos &&
         [...Array(8)].map((_, index) => <Shimmer key={index} />)}
     </div>
   );
