@@ -119,10 +119,10 @@ my-Youtube
 
 ## 📸 Screenshots
 ### 🎬 Home Page
-![Home Page](https://github.com/user-attachments/assets/a6b58e6d-eae9-44de-87d5-41df6a219088)
+<img src="https://github.com/user-attachments/assets/a6b58e6d-eae9-44de-87d5-41df6a219088" width="400" />
 
 ### 📺 Watch Video Page
-![Watch Video](https://github.com/user-attachments/assets/b7489430-8f00-4efb-bfd8-e847e2ea08bd)
+<img src="https://github.com/user-attachments/assets/b7489430-8f00-4efb-bfd8-e847e2ea08bd" width="400" />
 
 ---
 
