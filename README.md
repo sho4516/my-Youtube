@@ -86,11 +86,6 @@ my-Youtube
 |   |   ├── VideoCard.jsx
 |   |   ├── VideoContainer.jsx
 |   |   ├── WatchVideo.jsx
-│   ├── redux
-│   │   ├── store.js
-│   │   ├── appSlice.js
-│   │   ├── videoSlice.js
-│   │   ├── liveChatSlice.js
 │   ├── utils
 │   │   ├── constants.js
 │   │   ├── fetchAccessToken.js
